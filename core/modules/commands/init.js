@@ -30,7 +30,12 @@ Command.prototype.execute = function() {
 		return "Wiki folder is not empty";
 	}
 	// Loop through each of the specified editions
-	var editions = this.params.length > 0 ? this.params : ["empty"];
+	var emptyEdition = ["empty"];
+	var editions = this.params.length > 0 ? this.params : emptyEdition;
+
+	if(editions == emptyEdition){
+		this.commander.streams.output.write("Empty edition selected. Please note that no plugins are included with this Edition.\n");
+	};
 	for(var editionIndex=0; editionIndex<editions.length; editionIndex++) {
 		var editionName = editions[editionIndex];
 		// Check the edition exists
